@@ -9,9 +9,25 @@
   </head>
   <body>
     <form action="">
-      <label for="location">Search weather for your location</label>
-      <input type="text" id="location" />
-      <button class="search">Search</button>
+      <div class="searchInput">
+        <label for="location">Search weather for your location</label>
+        <input type="text" id="location" />
+      </div>
+      <button class="searchButton">Search</button>
     </form>
+    <div class="weatherContainer">
+      <div class="today">
+        <h2>Today</h2>
+        <div class="weatherToday displayWeather"></div>
+      </div>
+      <div class="tomorrow">
+        <h2>Tomorrow</h2>
+        <div class="weatherTomorrow displayWeather"></div>
+      </div>
+      <div class="afterTomorrow">
+        <h2>Day after tomorrow</h2>
+        <div class="weatherDayAfterTomorrow displayWeather"></div>
+      </div>
+    </div>
   </body>
 </html>
