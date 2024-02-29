@@ -1,7 +1,7 @@
 body {
-  background: linear-gradient(180deg, rgb(230, 236, 255), rgb(179, 196, 255));
-  height: 100vh;
-  width: 100vw;
+  background: linear-gradient(90deg, rgb(230, 236, 255), rgb(179, 196, 255));
+  height: min(100vw, auto);
+  max-width: 100vw;
   margin: 0;
   font-family: "Courier New", Courier, monospace;
 }
@@ -41,25 +41,26 @@ form {
 
 .weatherContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  overflow: auto;
   justify-items: center;
 }
-
+/* 
 .today {
   grid-area: 1 / 1 / 2 / 3;
-}
+} */
 
 .today,
 .tomorrow,
 .afterTomorrow {
   display: grid;
   justify-items: center;
+  width: 1fr;
 }
 
 .displayWeather {
-  height: 20em;
-  width: 20em;
+  height: max(100px, 20em);
+  width: clamp(100px, 20em, 300px);
   border: 1px dotted rgb(77, 115, 255, 0.4);
   box-shadow: 5px 5px 10px rgb(77, 115, 255, 0.4);
 }
