@@ -5,6 +5,9 @@ const weatherTomorrow = document.querySelector(".weatherTomorrow");
 const weatherDayAfterTomorrow = document.querySelector(
   ".weatherDayAfterTomorrow"
 );
+const linkToday = document.querySelector(".linkToday");
+const linkTomorrow = document.querySelector(".linkTomorrow");
+const linkDayAfterTomorrow = document.querySelector(".linkDayAfterTomorrow");
 
 searchButton.addEventListener("click", (e) => {
   e.preventDefault();
@@ -18,7 +21,6 @@ const weatherDataObj = async function getWeather() {
       { mode: "cors" }
     );
     const weatherData = await respons.json();
-    console.log(await weatherData);
 
     const getWeatherData = async () => {
       const weatherForLocationToday = {
@@ -46,6 +48,10 @@ const weatherDataObj = async function getWeather() {
           element: document.createElement("div"),
           data: await weatherData.current.wind_kph,
           text: "Wind (km/h): ",
+        },
+        icon: {
+          element: document.createElement("img"),
+          src: await weatherData.current.condition.icon,
         },
       };
       const weatherForLocationTomorrow = {
@@ -75,6 +81,10 @@ const weatherDataObj = async function getWeather() {
           data: await weatherData.forecast.forecastday["1"].day.maxwind_kph,
           text: "Wind (max. km/h): ",
         },
+        icon: {
+          element: document.createElement("img"),
+          src: await weatherData.forecast.forecastday["1"].day.condition.icon,
+        },
       };
       const weatherForLocationDayAfterTomorrow = {
         cloud: {
@@ -102,6 +112,10 @@ const weatherDataObj = async function getWeather() {
           element: document.createElement("div"),
           data: await weatherData.forecast.forecastday["2"].day.maxwind_kph,
           text: "Wind (max. km/h): ",
+        },
+        icon: {
+          element: document.createElement("img"),
+          src: await weatherData.forecast.forecastday["2"].day.condition.icon,
         },
       };
       return {
@@ -131,6 +145,7 @@ function display(obj) {
       ],
       weatherToday
     );
+    appendObjects([weather.weatherForLocationToday.icon.element], linkToday);
     appendObjects(
       [
         weather.weatherForLocationTomorrow.cloud.element,
@@ -138,8 +153,13 @@ function display(obj) {
         weather.weatherForLocationTomorrow.humidity.element,
         weather.weatherForLocationTomorrow.temperature.element,
         weather.weatherForLocationTomorrow.wind.element,
+        weather.weatherForLocationTomorrow.icon.element,
       ],
       weatherTomorrow
+    );
+    appendObjects(
+      [weather.weatherForLocationTomorrow.icon.element],
+      linkTomorrow
     );
     appendObjects(
       [
@@ -148,8 +168,13 @@ function display(obj) {
         weather.weatherForLocationDayAfterTomorrow.humidity.element,
         weather.weatherForLocationDayAfterTomorrow.temperature.element,
         weather.weatherForLocationDayAfterTomorrow.wind.element,
+        weather.weatherForLocationDayAfterTomorrow.icon.element,
       ],
       weatherDayAfterTomorrow
+    );
+    appendObjects(
+      [weather.weatherForLocationDayAfterTomorrow.icon.element],
+      linkDayAfterTomorrow
     );
   });
 }
@@ -168,6 +193,8 @@ function addAttributes(object) {
     for (const [key, value] of Object.entries(object[item])) {
       if (key === "element") {
         continue;
+      } else if (key === "src") {
+        object[item]["element"].setAttribute("src", value);
       } else {
         object[item]["element"].textContent =
           object[item]["text"] + object[item]["data"];
