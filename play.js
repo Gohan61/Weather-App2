@@ -16,10 +16,8 @@ searchButton.addEventListener("click", (e) => {
 
 const weatherDataObj = async function getWeather() {
   try {
-    const respons = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=f5793d9a1dc240899c454904231007&q=${input.value}&days=3&aqi=no&alerts=no}`,
-      { mode: "cors" }
-    );
+    const url = `http://api.weatherapi.com/v1/forecast.json?key=f5793d9a1dc240899c454904231007&q=${input.value}&days=3&aqi=no&alerts=no}`;
+    const respons = await fetch(url, { mode: "cors" });
     const weatherData = await respons.json();
 
     const getWeatherData = async () => {

@@ -45,10 +45,6 @@ form {
   overflow: auto;
   justify-items: center;
 }
-/* 
-.today {
-  grid-area: 1 / 1 / 2 / 3;
-} */
 
 .today,
 .tomorrow,
@@ -63,4 +59,10 @@ form {
   width: clamp(100px, 20em, 300px);
   border: 1px dotted rgb(77, 115, 255, 0.4);
   box-shadow: 5px 5px 10px rgb(77, 115, 255, 0.4);
+}
+
+.displayWeather * {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
