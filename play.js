@@ -11,6 +11,7 @@ const linkDayAfterTomorrow = document.querySelector(".linkDayAfterTomorrow");
 
 searchButton.addEventListener("click", (e) => {
   e.preventDefault();
+  clearScreen();
   weatherDataObj().then((obj) => display(obj));
 });
 
@@ -201,4 +202,11 @@ function addAttributes(object) {
       }
     }
   }
+}
+
+function clearScreen() {
+  const displayWeather = document.querySelectorAll(".displayWeather div");
+  const linkWeather = document.querySelectorAll(".displayWeather a > img");
+  displayWeather.forEach((e) => e.remove());
+  linkWeather.forEach((e) => e.remove());
 }
